@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "################################\n# This file performs some preliminary analysis\n# It outputs a gpData_v1.Rda in the same folder as the analysis script\n# The file contains gpM1-gpM3, workerIdList\n################################",
+    "created" : 1496682427612.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2069305721",
+    "id" : "6F8E61FF",
+    "lastKnownWriteTime" : 6727018994580353127,
+    "last_content_update" : 1496682454549,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

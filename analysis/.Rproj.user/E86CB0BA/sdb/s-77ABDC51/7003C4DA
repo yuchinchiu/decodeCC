@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "################################\n# This file extract data from the log files (Mturk) and saved as a group tibble\n# It outputs a gpData_v1.Rda in the same folder as the analysis script\n# The file contains gpM1-gpM3, workerIdList\n################################\n\nrm(list=ls())\nlibrary(tidyverse)\ncurrentDir <-  getwd()\ndataDir <- \"X:/public_html/decodeCC_v1/data/v1_batches\"\nsetwd(dataDir)\n\n\nfileList <- list.files(path = dataDir, pattern = \"*.log\")\nexpColNames <- c(\"runId\", \"phase\", \"stim\", \"stimCat\", \"trialType\", \"blockType\", \"miniBlock\", \n                 \"memCond\",\"response\", \"sbjResp\", \"sbjACC\", \"sbjRT\", \"catachTrial\")\n\nworkerIdList <- c(\"\")\nSCNT <- 0\ngpM1 <- tibble()\ngpM2 <- tibble()\ngpM3 <- tibble()\n\nfor (i in 1:length(fileList)){\n  \n  mydata <- as.matrix(read_csv(fileList[i], col_names = FALSE, col_types = cols(.default = col_integer())))\n  mydata <- matrix(mydata, byrow = FALSE, ncol = length(expColNames))\n  mydata <- as.tibble(mydata)\n  \n  colnames(mydata) <- expColNames\n  \n  mydata$runId <- mydata$runId +1\n  mydata$catachTrial <- NULL\n  \n  # sepearte 3 phases of data into different data tibbles\n  \n  p1Data <- mydata %>% filter(runId <=2)\n  p2Data <- mydata %>% filter(runId ==4|runId ==5)\n  p3Data <- mydata %>% filter(runId >=6)\n  \n  colnames(p2Data)[colnames(p2Data)==\"blockType\"] <- \"task\"\n  colnames(p2Data)[colnames(p2Data)==\"stimCat\"] <- \"swProb\"\n  p2Data$miniBlock <- NULL\n  p2Data$memCond   <- NULL\n  \n  p3Data$miniBlock <- NULL\n  p3Data[which(p3Data$memCond==1),\"blockType\"] <- 0\n  p3Data[which(p3Data$memCond==2),\"blockType\"] <- 0\n  p3Data[which(p3Data$memCond==3),\"blockType\"] <- 1\n  p3Data[which(p3Data$memCond==4),\"blockType\"] <- 1\n  \n  p3Data[which(p3Data$memCond==1),\"trialType\"] <- 0\n  p3Data[which(p3Data$memCond==2),\"trialType\"] <- 1\n  p3Data[which(p3Data$memCond==3),\"trialType\"] <- 0\n  p3Data[which(p3Data$memCond==4),\"trialType\"] <- 1\n\n  p1ACC <- mean(p1Data$sbjACC, na.rm = TRUE)*100\n  p2ACC <- mean(p2Data$sbjACC, na.rm = TRUE)*100\n  \n  if (p1ACC >=65 & p2ACC >=65){\n    SCNT <- SCNT +1\n    p1Data$sbjId <- SCNT\n    p2Data$sbjId <- SCNT\n    p3Data$sbjId <- SCNT\n    \n\n    gpM1 <- bind_rows(gpM1, p1Data)\n    gpM2 <- bind_rows(gpM2, p2Data)\n    gpM3 <- bind_rows(gpM3, p3Data)\n\n  # figure out the corresponding sbjId  \n  fileNameTemp <- strsplit(fileList[i], \"\\\\.\")\n  logFileName  <- fileNameTemp[[1]][1]\n  fileList2 <- list.files(dataDir, pattern = paste(logFileName, \".txt\", sep = \"\"))\n  batchInfo <- read_delim(fileList2, delim = \":\", col_names = FALSE, col_types = cols(.default = col_character()))\n  workerIdList[SCNT] <- batchInfo[which(batchInfo[,1]==\"workerId\"),2]\n  \n  \n  }\n}\n\nsetwd(currentDir)\nsave(gpM1, gpM2, gpM3, workerIdList, file = \"gpData_v1.Rda\")",
+    "created" : 1496681647758.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1922249691",
+    "id" : "7003C4DA",
+    "lastKnownWriteTime" : 1496681774,
+    "last_content_update" : 1496681774141,
+    "path" : "~/YCCProjects/decodeCC/analysis/step1_gatherData.R",
+    "project_path" : "step1_gatherData.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
