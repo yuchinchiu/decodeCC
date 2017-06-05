@@ -31,9 +31,11 @@ for (i in 1:length(fileList)){
   
   mydata$runId <- mydata$runId +1
   mydata$catachTrial <- NULL
+  mydata$phase <- NULL
+  
+  
   
   # sepearte 3 phases of data into different data tibbles
-  
   p1Data <- mydata %>% filter(runId <=2)
   p2Data <- mydata %>% filter(runId ==4|runId ==5)
   p3Data <- mydata %>% filter(runId >=6)
@@ -63,7 +65,6 @@ for (i in 1:length(fileList)){
     p2Data$sbjId <- SCNT
     p3Data$sbjId <- SCNT
     
-
     gpM1 <- bind_rows(gpM1, p1Data)
     gpM2 <- bind_rows(gpM2, p2Data)
     gpM3 <- bind_rows(gpM3, p3Data)
