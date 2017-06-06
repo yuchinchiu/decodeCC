@@ -7,7 +7,7 @@
 rm(list=ls())
 library(tidyverse)
 currentDir <-  getwd()
-dataDir <- "X:/public_html/decodeCC_v1/data/v1_batches"
+dataDir    <- "X:/public_html/decodeCC_v1/data/v1_batches"
 setwd(dataDir)
 
 
