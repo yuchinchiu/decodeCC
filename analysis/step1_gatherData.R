@@ -76,7 +76,6 @@ for (i in 1:length(fileList)){
   batchInfo <- read_delim(fileList2, delim = ":", col_names = FALSE, col_types = cols(.default = col_character()))
   workerIdList[SCNT] <- batchInfo[which(batchInfo[,1]=="workerId"),2]
   
-  
   }
 }
 
