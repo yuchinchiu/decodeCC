@@ -43,7 +43,7 @@ for (S in 1:length(workerIdList)){
   
   mydata <- gpM1 %>% filter(sbjId==S)
   condM <- mydata %>%
-    filter(sbjRT > 150, sbjRT <=1000) %>%
+    filter(sbjRT > 200, sbjRT <=1000) %>%
     group_by(blockType, trialType) %>%
     summarise(meanRT = mean(sbjRT, na.rm = TRUE), meanACC = mean(sbjACC))
   condM <- bind_cols(tibble(sbjId=rep(S,dim(condM)[1])), condM)
@@ -56,7 +56,8 @@ for (S in 1:length(workerIdList)){
   rm(mydata, condM)
   mydata <- gpM2 %>% filter(sbjId == S)
   condM <- mydata %>%
-    filter(sbjRT > 150, sbjRT <= 1000) %>%
+    slice(40:n()) %>%
+    filter(sbjRT > 200, sbjRT <= 1000) %>%
     group_by(swProb, trialType) %>%
     summarise(meanRT = mean(sbjRT, na.rm = TRUE), meanACC = mean(sbjACC))
   condM <- bind_cols(tibble(sbjId = rep(S,dim(condM)[1])), condM)
@@ -108,5 +109,8 @@ for (S in 1:length(workerIdList)){
 }
 
 
-# plot the 2 x 2 
+
+setwd(currentDir)
+save(gpCondM1, gpCondM2, gpCondM3, gpBasic, gpMemRespCNT, file = "gpData_summary.Rda")
+
 
