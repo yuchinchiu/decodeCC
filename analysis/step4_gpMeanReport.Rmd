@@ -1,0 +1,105 @@
+---
+title: "Summary of basic findings"
+output: html_notebook
+---
+#### First, Set up the environment and load the data
+
+```{r}
+rm(list=ls())
+library(tidyverse)  # to use ggplot 
+currentDir <-  getwd()
+setwd(currentDir)
+load("step3_gpSummary.Rda")
+```
+
+#### Set up some formating for the plots
+Set up some good format, apatheme is good for publication, with white background, with black axis lines, no grids
+Default theme is good for visual comparison (theme_gray() with white grid lines, gray background)
+
+```{r}
+apatheme = theme_bw()+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        axis.line=element_line())
+
+dodge = position_dodge(width=0.9)
+```
+
+## 1. Plot the 2 block type x 2 trial type CSPC effect: RT
+```{r}
+CSPC %>%
+  ggplot(aes(x = blockType, y = gpmeanRT, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanRT + (1*SE_rt), ymin = gpmeanRT - (1*SE_rt)), 
+                position = dodge, width = .25) + 
+  #apatheme + 
+  ylab("mean RT (Stroop)") +
+  coord_cartesian(ylim=c(550,700)) +
+  scale_fill_grey()
+# alternatively, can use geom_bar(stat='identity', position = dodge) in lieu of goem_col(poistion = dodge)
+# the default of geom_bar is count, but the default for geom_col is 'identity' (data)
+
+```
+
+## 2.Plot the 2 block type x 2 trial type CSPC effect: ACC
+```{r}
+CSPC %>%
+  ggplot(aes(x = blockType, y = gpmeanACC, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanACC + (1*SE_acc), ymin = gpmeanACC - (1*SE_acc)), 
+                position = dodge, width = .25) + 
+  ylab("mean ACC (Stroop)") +
+  coord_cartesian(ylim=c(65,100)) +
+  scale_fill_grey()
+```
+
+## 3.Plot the 2 block type x 2 trial type ISSP effect: RT
+```{r}
+ISSP %>%
+  ggplot(aes(x = swProb, y = gpmeanRT, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanRT + (1*SE_rt), ymin = gpmeanRT - (1*SE_rt)), 
+                position = dodge, width = .25) + 
+  ylab("mean RT (task-switching)") +
+  coord_cartesian(ylim=c(550,700)) +
+  scale_fill_grey()
+```
+
+
+## 4.Plot the 2 block type x 2 trial type ISSP effect: ACC
+```{r}
+ISSP %>%
+  ggplot(aes(x = swProb, y = gpmeanACC, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanACC + (1*SE_acc), ymin = gpmeanACC - (1*SE_acc)), 
+                position = dodge, width = .25) + 
+  ylab("mean ACC (task-switching)") +
+  coord_cartesian(ylim=c(65,100)) +
+  scale_fill_grey()
+```
+
+
+## 5.Plot the memory performance as a function of control context previously (2 block type x 2 trial type) in the Stroop task
+```{r}
+recogM %>%
+  ggplot(aes(x = blockType, y = gpmeanACC, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanACC + (1*SE_acc), ymin = gpmeanACC - (1*SE_acc)), 
+                position = dodge, width = .25) + 
+  ylab("mean ACC (memory)") +
+  coord_cartesian(ylim=c(45,80)) +
+  scale_fill_grey()
+```
+
+## 6.Plot the RT for memory task as a function of control context previously (2 block type x 2 trial type) in the Stroop task
+```{r}
+recogM %>%
+  ggplot(aes(x = blockType, y = gpmeanRT, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanRT + (1*SE_rt), ymin = gpmeanRT - (1*SE_rt)), 
+                position = dodge, width = .25) + 
+  ylab("mean RT (memory)") +
+  coord_cartesian(ylim=c(800,1000)) +
+  scale_fill_grey()
+```
