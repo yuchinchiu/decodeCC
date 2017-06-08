@@ -71,7 +71,7 @@ colnames(df)[colnames(df)=="meanACC"] <- "M"
 LnMSE_acc <- getWSSE(df)
 
 CSPC_half <- gpCondM1_half %>%
-  group_by(blockType, trialType) %>% 
+  group_by(half, blockType, trialType) %>% 
   summarise(gpmeanRT = mean(meanRT), SE_rt = LnMSE_rt , gpmeanACC = mean(meanACC)*100, SE_acc = LnMSE_acc*100) 
 
 
@@ -85,7 +85,7 @@ colnames(df)[colnames(df)=="meanACC"] <- "M"
 LnMSE_acc <- getWSSE(df)
 
 ISSP_half <- gpCondM2_half %>%
-  group_by(swProb, trialType) %>%
+  group_by(half, swProb, trialType) %>%
   summarise(gpmeanRT = mean(meanRT), SE_rt = LnMSE_rt, gpmeanACC = mean(meanACC)*100, SE_acc = LnMSE_acc*100) 
 
 
@@ -101,7 +101,7 @@ LnMSE_acc <- getWSSE(df)
 
 
 recogM_half <- gpCondM3_half %>%
-  group_by(blockType, trialType) %>% 
+  group_by(half, blockType, trialType) %>% 
   summarise(gpmeanRT = mean(meanRT), SE_rt = LnMSE_rt, gpmeanACC = mean(meanACC)*100, SE_acc = LnMSE_acc*100) 
 
 
