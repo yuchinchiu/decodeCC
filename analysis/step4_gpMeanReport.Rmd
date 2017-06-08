@@ -26,8 +26,11 @@ apatheme = theme_bw()+
 dodge = position_dodge(width=0.9)
 ```
 
-## 1. Plot the 2 block type x 2 trial type CSPC effect: RT
+## 1a. Plot the 2 block type x 2 trial type CSPC effect: RT
 ```{r}
+levels(CSPC$trialType) <- c("Congruent", "Incongruent")
+levels(CSPC$blockType) <- c("Rarely InCongruent", "Freq. InCongruent")
+
 CSPC %>%
   ggplot(aes(x = blockType, y = gpmeanRT, fill = trialType))  +
   geom_col(position = dodge) + 
@@ -39,6 +42,25 @@ CSPC %>%
   scale_fill_grey()
 # alternatively, can use geom_bar(stat='identity', position = dodge) in lieu of goem_col(poistion = dodge)
 # the default of geom_bar is count, but the default for geom_col is 'identity' (data)
+ 
+
+```
+## 1b. Plot the 2 half x 2 block type x 2 trial type CSPC effect: RT
+```{r}
+
+levels(CSPC_half$half) <- c("First Half", "Second Half")
+levels(CSPC_half$blockType) <- c("Rarely InCongruent", "Freq. InCongruent")
+levels(CSPC_half$trialType) <- c("Congruent", "Incongruent")
+
+CSPC_half %>%
+  ggplot(aes(x = blockType, y = gpmeanRT, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanRT + (1*SE_rt), ymin = gpmeanRT - (1*SE_rt)), 
+                position = dodge, width = .25) + 
+  facet_grid(.~half) + 
+  ylab("mean RT (Stroop)") +
+  coord_cartesian(ylim = c(550,700)) +
+  scale_fill_grey() 
 
 ```
 
@@ -54,8 +76,11 @@ CSPC %>%
   scale_fill_grey()
 ```
 
-## 3.Plot the 2 block type x 2 trial type ISSP effect: RT
+## 3a.Plot the 2 block type x 2 trial type ISSP effect: RT
 ```{r}
+levels(ISSP$trialType) <- c("Repeat", "Switch")
+levels(ISSP$swProb) <- c("Rarely switching", "Freq. switching")
+
 ISSP %>%
   ggplot(aes(x = swProb, y = gpmeanRT, fill = trialType))  +
   geom_col(position = dodge) + 
@@ -64,8 +89,26 @@ ISSP %>%
   ylab("mean RT (task-switching)") +
   coord_cartesian(ylim=c(550,700)) +
   scale_fill_grey()
+
+
 ```
 
+## 3b.Plot the 2 half x 2 block type x 2 trial type ISSP effect: RT
+```{r}
+levels(ISSP_half$trialType) <- c("Repeat", "Switch")
+levels(ISSP_half$swProb) <- c("Rarely switching", "Freq. switching")
+levels(ISSP_half$half) <- c("First half", "Second half")
+
+ISSP_half %>%
+  ggplot(aes(x = swProb, y = gpmeanRT, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanRT + (1*SE_rt), ymin = gpmeanRT - (1*SE_rt)), 
+                position = dodge, width = .25) + 
+  facet_grid(.~half) + 
+  ylab("mean RT (task-switching)") +
+  coord_cartesian(ylim=c(550,700)) +
+  scale_fill_grey()
+```
 
 ## 4.Plot the 2 block type x 2 trial type ISSP effect: ACC
 ```{r}
@@ -80,8 +123,12 @@ ISSP %>%
 ```
 
 
-## 5.Plot the memory performance as a function of control context previously (2 block type x 2 trial type) in the Stroop task
+## 5a.Plot the memory performance as a function of control context previously (2 block type x 2 trial type) in the Stroop task
+
 ```{r}
+levels(recogM$trialType) <- c("Congruent", "Incongruent","New")
+levels(recogM$blockType) <- c("Rarely InCongruent", "Freq. InCongruent", "New")
+
 recogM %>%
   ggplot(aes(x = blockType, y = gpmeanACC, fill = trialType))  +
   geom_col(position = dodge) + 
@@ -90,6 +137,25 @@ recogM %>%
   ylab("mean ACC (memory)") +
   coord_cartesian(ylim=c(45,80)) +
   scale_fill_grey()
+
+```
+## 5b.Plot the memory performance as a function of control context previously (2 half x 2 block type x 2 trial type) in the Stroop task
+
+```{r}
+levels(recogM_half$trialType) <- c("Congruent", "Incongruent", "New")
+levels(recogM_half$blockType) <- c("Rarely InCongruent", "Freq. InCongruent", "New")
+levels(recogM_half$half) <- c("New", "First Half", "Second Half")
+
+recogM_half %>%
+  ggplot(aes(x = blockType, y = gpmeanACC, fill = trialType))  +
+  geom_col(position = dodge) + 
+  geom_errorbar(aes(ymax = gpmeanACC + (1*SE_acc), ymin = gpmeanACC - (1*SE_acc)), 
+                position = dodge, width = .25) + 
+  facet_grid(.~half) + 
+  ylab("mean ACC (memory)") +
+  coord_cartesian(ylim=c(45,80)) +
+  scale_fill_grey()
+
 ```
 
 ## 6.Plot the RT for memory task as a function of control context previously (2 block type x 2 trial type) in the Stroop task
