@@ -169,3 +169,19 @@ recogM %>%
   coord_cartesian(ylim=c(800,1000)) +
   scale_fill_grey()
 ```
+## 7.Scatter plot (CSPC vs. ISSP) to see if there is any relationship bw two effects: 
+```{r}
+gpBasic %>%
+  ggplot(mapping = aes(x = ISSP, y = CSPC)) + 
+  geom_point() + 
+  geom_smooth(method=lm)
+
+```
+
+### No correlation so far
+
+```{r}
+pearR <- cor(gpBasic$CSPC, gpBasic$ISSP)
+pearR 
+```
+
