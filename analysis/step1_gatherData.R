@@ -5,7 +5,7 @@
 ################################
 
 rm(list=ls())
-library(tidyverse)
+library('tidyverse')
 currentDir <-  getwd()
 dataDir    <- "X:/public_html/decodeCC_v1/data/v1_batches"
 setwd(dataDir)
@@ -31,7 +31,7 @@ for (i in 1:length(fileList)){
   mydata$runId <- mydata$runId +1
   mydata$catachTrial <- NULL
   mydata$half <- 0
-  
+
   # get rid off the practice block for the filler task
   mydata <- mydata %>% filter(runId!=3)
   
@@ -77,6 +77,15 @@ for (i in 1:length(fileList)){
   p3Data[which(p3Data$memCond==2),"trialType"] <- 1
   p3Data[which(p3Data$memCond==3),"trialType"] <- 0
   p3Data[which(p3Data$memCond==4),"trialType"] <- 1
+  
+  # calculate memory acc
+  p3Data$sbjmemYN <- 0  # if there was no response, set it as juding 'new' [incorrect for old, but.. would be correct for new ...]
+  p3Data[which(p3Data$sbjResp ==3|p3Data$sbjResp ==4), "sbjmemYN"] <- 1 # prob old, def old
+  p3Data[which(p3Data$sbjResp ==1|p3Data$sbjResp ==2), "sbjmemYN"] <- 0 # def new, prob new
+  p3Data$sbjACC <- 0
+  p3Data[which(p3Data$sbjmemYN == p3Data$response), "sbjACC"] <- 1
+  
+  
 
   p1ACC <- mean(p1Data$sbjACC, na.rm = TRUE)*100
   p2ACC <- mean(p2Data$sbjACC, na.rm = TRUE)*100
@@ -86,6 +95,11 @@ for (i in 1:length(fileList)){
     p1Data$sbjId <- SCNT
     p2Data$sbjId <- SCNT
     p3Data$sbjId <- SCNT
+    
+    p1Data$trial <- c(1:dim(p1Data)[1])
+    p2Data$trial <- c(1:dim(p2Data)[1])
+    p3Data$trial <- c(1:dim(p3Data)[1])
+    
     
     gpM1 <- bind_rows(gpM1, p1Data)
     gpM2 <- bind_rows(gpM2, p2Data)
