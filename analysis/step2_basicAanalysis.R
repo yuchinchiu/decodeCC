@@ -95,12 +95,8 @@ for (S in 1:length(workerIdList)){
   # sbjResp: 1=new, 4=old
   rm(mydata, condM)
   mydata <- gpM3 %>% filter(sbjId==S)
-  mydata[which(mydata$sbjResp ==3|mydata$sbjResp ==4), "sbjmemYN"] <- 1 # prob old, def old
-  mydata[which(mydata$sbjResp ==1|mydata$sbjResp ==2), "sbjmemYN"] <- 0 # def new, prob new
   
-  # calculate memory acc
-  mydata$sbjACC <- 0
-  mydata[which(mydata$sbjmemYN == mydata$response), "sbjACC"] <- 1
+  
   condM <- mydata %>%
     filter(blockType!=99) %>%
     group_by(blockType, trialType) %>%
