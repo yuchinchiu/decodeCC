@@ -1,0 +1,77 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.fit {
+  max-width: 100%;
+  max-height: 100%;
+}
+.center {
+  display: block;
+  margin: auto;
+}
+
+.buttonCSS {
+    background-color:#00BFFF;  /* Green #4CAF50 or currently blue*/ 
+    border: none;
+    color: white;
+    padding: 12px 12px;
+	border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	font-family: Verdana;
+}
+
+html {
+	height:100%;
+	width:100%;
+	margin: 0;
+	padding:0;
+	border: 0;
+	
+}
+
+body {
+   background-color: #FFFFFF;
+   height:100%;
+   width: 100%;
+   margin:   0;
+   padding:  0;
+   border:   0;
+   font: 30px Verdana, sans-serif;  /*fonts in paragraph in the body*/
+   vertical-align: middle;
+}
+
+
+#Wrapper {
+    height:100%;
+    width: 100%;
+    margin:   0;
+    padding:  0;
+    text-align:    center;
+    vertical-align: middle;
+	font: 30px Verdana, sans-serif;  /*fonts in paragraph in the body*/
+}
+
+
+#T3RSmapping {
+	position:fixed;
+	top:85%;
+	left:50%;
+	width: 469px; /* width & height of the jpeg*/
+	height: 182px; 
+	margin-left: -234px; /*set to a negative number 1/2 of your width??*/
+	margin-top: -91px; /*set to a negative number 1/2 of your height??*/
+	
+}
+
+#EgnerServer_form {
+	font-size: 16px;
+	font-family: Verdana;	
+	text-align: left;
+	margin-top: 50px;
+	margin-left: 200px;
+	margin-bottom: 50px;
+}
