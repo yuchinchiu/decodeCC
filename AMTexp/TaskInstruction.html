@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<script type="text/javascript" src="bin/jquery-1.11.2.min.js"></script>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<STYLE TYPE="text/css">
+	BODY{
+		color:black;
+		background-color:white;
+		font-family: Verdana;
+		font-size: 14px;
+		}
+	</STYLE>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+		instructionSet = opener.getInstruction(); 
+		$("#tsk1").css('color',"#FF4500");
+		$("#tsk1").html(instructionSet[0]);
+		$("#tsk1").show();	
+	
+		var snd = new Audio('beep-7.mp3');
+			$("#PlaySound").click(function(){
+				snd.play();
+			});
+			
+		$("#ReturnButton").click(function(){
+			opener.updateMainMenu(1);
+			JavaScript:window.close();
+		});
+	});
+	</script>
+
+</head>
+
+<body>
+
+<h2>Instructions</h2>
+<p style="font-weight: bold"> If you have done this task before, ...please return the hit. <br/></p>
+<p style="font-weight: bold"> *But if you are unsure, go ahead and proceed. If you have done this hit before, you won't be able to proceed further in the next few steps. <br/></p>
+<br/>
+<p> 
+This task takes 40 minutes.  Make sure you are able to dedicate such chunk of time before you start. <br/>
+In this experiment, we are interested in people's ability to categorize images of objects.<br/>
+You will be asked to first perform a categorization task on color images. <br/>
+</p>
+<p style="color: #FF4500;font-weight:bold; font-size: 20px;"> Your goal is to judge whether the object in an image<br/>
+ is a man-made object or a natural object. <br/></p>
+<p> Use the following two keys to make categorization responses. </p> 
+<img src="mapping.png">
+</br>
+<p id="tsk1" style="font-weight:bold;font-size: 20px;"></p>
+<p> In addition, you will hear <span style = "color: #1E90FF;font-weight:bold">an auditory word</span> on every single trial.<br/>
+Sometimes, for a block of trials, the word spoken through the speaker <br/>
+<span style = "color: #1E90FF;font-weight:bold"> almost always matches</span> the category of the object, which <span style = "color: #1E90FF;font-weight:bold">helps</span> your categorization performance. <br/>
+<br/>
+Other times, for a block of trials, the word spoken through the speaker <br/>
+<span style = "color: #1E90FF;font-weight:bold"> almost never matches</span> the category of the object, which <span style = "color: #1E90FF;font-weight:bold">hinders</span> your categorization performance. <br/>
+</p>
+
+<p> To prepare you, a written instruction will appear at the beginning of every 10 trials. <br/>
+If the instruction is <span style = "color: #1E90FF;font-weight:bold">EASY</span> - 
+it means that the auditory word will <span style = "color: #1E90FF;font-weight:bold">help</span> your cetegorization performance. <br/>
+If the instruction is <span style = "color: #1E90FF;font-weight:bold">HARD</span> - 
+it means that the auditory word will <span style = "color: #1E90FF;font-weight:bold">hinder</span> your categorization performance.<br/>
+</p>
+
+<p>
+Therefore, you should <span style = "color:#ff00ff;font-weight:bold">make use</span> of these instructions (easy, hard) <br/>
+and get your mind ready for the following type of trials.
+</p>
+
+<button id="PlaySound" style="font-family: arial; color: black; font-size: 24px;">Click to play the auditory stimulus to test your audio set up.</button>
+
+<p> 
+If you cannot hear the beep, make sure your audio is not muted. Or turn up the volume. <br/>
+The suggested volume is at least 20%.
+</p>
+
+<p> 
+=============================================================</br>
+Please maintain >80% accuracy.</br>
+=============================================================</br>
+You will receive some practice trials (about 1 minutes) before going into the main task. </br>
+The main task is divided into 2 long blocks, about 5  minutes each. </br>
+Each block includes 8 mini-block, and each is preceeded with a written instruction (easy, hard). </br>
+The total time allowed to complete the task is 80 minutes.</br>
+</br>
+Must submit data to receive payment.</br>
+It is very important to stay focused during the experiment. </br>
+Please do not do anything else while doing this task.</br>
+</p>
+<p style="font-weight: bold">Please note that we only accept jobs with >80% accuracy, </br>
+which is a reasonable threshold based on our previous studies.</p>
+<button id="ReturnButton" style="font-family:arial;color:black;font-size:24px"> Click to continue </button>
+</body>
+</html>
