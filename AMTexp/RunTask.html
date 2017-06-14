@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- 
+old version of JQuery used up until 2/3/2015
+	<script type="text/javascript" src="bin/jquery-1.7.1.js"></script>
+	"To solve character encoding error -- adding the <meta .. those two lines"
+-->
+
+<head>
+	<link rel="stylesheet" href="bin/runTask.css" type="text/css" meta charset="utf-8"/>
+	
+	<script type="text/javascript" src="bin/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="bin/jquery-ui.js"></script>
+	<script type="text/javascript" src="bin/jquery.imageloader.js"></script>
+	<script type="text/javascript" src="bin/jquery.imageloader.min.js"></script> 
+
+	<script type="text/javascript" src="bin/myFunctions.js"></script>
+	<script type="text/javascript" src="bin/trialGen.js"></script>
+	<script type="text/javascript" src="bin/runTrials.js"></script>	
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	
+</head>
+
+
+<body>
+
+
+<table id="wrapper">
+    <tr>
+	    <td>
+			
+			<p id="warning"></p>
+			<p id="tsk3"></p>
+			<p id="tsk1"></p>			
+			<p id="tsk2"></br></p>	
+			<p id="indicator"></p>
+			<p id="stimulus"></p>			
+			<p id="miniBkInstruction"></p>			
+			<p id="runFeedback"></p>
+		
+			
+			<form id="EgnerServer_form" method="POST" action="http://152.3.33.45/AMTSubmit/dataHandler.php">						
+				
+				<input type="hidden" id="ExpName" name="ExpName" value="decodeCC">	
+				<input type="hidden" id="assignmentId" name="assignmentId" value="">
+				<input type="hidden" id="workerId" name="workerId" value="">
+				<input type="hidden" id="hitId" name="hitId" value="">
+				<input type="hidden" id="RTs" type="text" name = "RTs">
+				<input type="hidden" id="ACC" type="text" name = "ACC">
+				
+				<p id="demo1" style="font-weight:bold;color:#FF8C00">Age:<input id="age" type="text" name = "age"></p>
+				
+				<p id="demo2"><span style = "font-weight:bold;color:#FF8C00"></br>Gender:</span>
+				<select id= "gender" name="gender">
+				<option value="Male"> Male</option>
+				<option value="Female"> Female</option>
+				<option value="NA"> Do not wish to reply</option>
+				</select>
+				</p>
+				
+				<p id="demo3"><span style = "font-weight:bold;color:#FF8C00"></br>Ethnicity:</span>
+				<select id= "ethnicity" name="ethnicity">
+				<option value="Hispanic/Latino"> Hispanic/Latino</option>
+				<option value="Non-Hispanic/Latino"> Non-Hispanic/Latino</option>
+				<option value="NA"> Do not wish to reply</option>
+				</select>
+				</p>
+				
+				<p id="demo4" style="font-weight:bold;color:#FF8C00"></br>Race:
+				<select id= "race" name="race">
+				<option value="American Indian/Alaska Native">American Indian/Alaska Native</option>
+				<option value="Asian">Asian</option>
+				<option value="Native Hawaiian/Other Pacific Islander">Native Hawaiian/Other Pacific Islander</option>  
+				<option value="Black/African American">Black/African American</option>  
+				<option value="White/Caucasion">White/Caucasion</option>  
+				<option value="Multiracial">Multiracial</option>  
+				<option value="Other">Other</option>		
+				</select>
+				</p>
+				
+				<input id="submitButton" type="submit" name="Finish" value="Click to finish">
+				
+				
+			</form>
+			
+			<button class="buttonCSS" id="demographicDone"></button>
+			<button class="buttonCSS" id="endTaskButton"></button>
+			<button class="buttonCSS" id="nextBlockButton"></button>
+			<button class="buttonCSS" id="startExpButton"></button>		
+
+			
+		</td>
+	</tr>
+</table>
+<p id="T3RSmapping"></p>
+<br/>	
+</body>
+</html>
