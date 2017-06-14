@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<script type="text/javascript" src="bin/jquery-1.7.1.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#ICAgreeButton").click(function(){
+				opener.informedConsentAction(true);
+				JavaScript:window.close();
+			});
+			
+			$("#ICDisagreeButton").click(function(){
+				opener.informedConsentAction(false);
+				JavaScript:window.close();
+			});
+		});
+
+	</script>
+
+</head>
+<body>
+
+<p> <b>About the Study:</b> This study will investigate how you process information and make decisions. 
+Expect to spend an hour at most to complete this study. If you choose to take part in this study, you will be asked to participate in different types of tasks. 
+We may ask you to make decisions based on sounds (such as spoken words in English or non-speech sounds) or images or videos 
+(such as faces, everyday objects, patterns, shapes, animals) that we will present to you. You may also be asked to fill out some questionnaires about your demographic information, attitudes 
+and preferences regarding different types of decisions.
+</p>
+
+
+<p> <b>Voluntariness:</b> </p>
+
+<p>This study is completely voluntary and you can withdraw from this study at any time by closing your Internet browser window.</p>
+<p><b>Compensation:</b> You will receive the amount of money indicated in the HIT description for your participation. We will screen your responses prior to compensation. 
+If you do not complete the task, or we feel that you completed it to an unsatisfactory standard (ie. you do not follow the instructions), you will not be compensated. 
+This policy is in line with Amazon Mechanical Turk standards, which state "a Requester may reject your work if the HIT was not completed correctly or the instructions were not followed."</p>
+
+<p><b>How Confidentiality Will Be Maintained:</b> Amazon Mechanical Turk will provide us, the researchers, only with your responses. We will not have access to your personal information.</p>
+
+<p><b>Risks/Benefits:</b> We know of no risks or benefits to you for participating in this research study.  The potential benefits of this research lie in the knowledge that will be acquired.</p>
+
+<p><b>Contact Information:</b> If you have any questions at this time or during the experiment, please feel free to ask. 
+If questions arise after the experiment, you may contact the primary investigator, Tobias Egner (tobias.egner@duke.edu or 919-684-1034). 
+You may also contact Human Subjects Protection at ors-info@duke.edu for questions about your rights as a research subject.</p>
+
+<p>Please click to indicate your consent to participate in the study</p>
+
+<button id="ICAgreeButton" style="font-family:arial;color:black;font-size:20px;">I agree to participate.</button>
+<button id="ICDisagreeButton" style="font-family:arial;color:black;font-size:20px;">I DO NOT agree to participate.</button>
+
+</body>
+</html>
