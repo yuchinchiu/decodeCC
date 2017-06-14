@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<script type="text/javascript" src="bin/jquery-1.7.1.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			var data = [['']];
+			var workerID = opener.getWorkerId();
+			$("#showWorkerID").html(workerID);
+			$("#showWorkerID").show();			
+			//var demoCodeArray = ['done'];   // CHANGE THIS CODE ACCORDINGLY (it will need to match the one in google doc)
+	
+			$("#returnButton").click(function(){
+				//var demoVCode = document.getElementById('demoCode').value;
+				//if (jQuery.inArray(demoVCode, demoCodeArray)!=-1){  // if found				
+				//	$("#Demographics", opener.window.document).val(data.join(";"));					
+					JavaScript:window.close();
+					opener.updateMainMenu(5);
+				//}
+				//else{
+				//	alert("Please fill out the demographics survey and complete Step 3!");
+				//}
+				
+			
+			});
+			
+		})
+	
+	</script>
+
+</head>
+<body>
+<h2 style="font-family:arial;">Demographics</h2>
+<p style="font-family:arial;">Please carefully follow the steps below to fill out the demographics survey.</p>
+&nbsp;
+<p style="font-family:arial;font-weight:bold"><span style = "color:green">Step 1.</span> Please copy or write down your worker ID: <span id="showWorkerID" style="font-family:arial;font-weight:bold;color:red">[workerID]</span></p>
+<!--///////////////// MAKE SURE TO INCLUDE YOUR OWN LINK.... SINCE WE EACH HAVE DIFFERENT FORM ////////////////////////////////-->
+<p style="font-family:arial;font-weight:bold"><span style = "color:green">Step 2.</span> Please fill the following form:</p>
+<iframe src="https://docs.google.com/forms/d/1nVK5S7rcav6XHvR_GYk6-Is7iBYg0b1M9pWPhprZDmM/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+<p style="font-family:arial;font-weight:bold"><span style = "color:green">Step 3.</span> Once you are done, click the button below: </p>
+
+&nbsp;
+<p></p>
+<button id="returnButton" style="font-family:arial;color:black;font-size:14px;">Return to main menu</button>
+
+</body>
+</html>
