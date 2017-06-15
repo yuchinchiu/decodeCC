@@ -1,8 +1,5 @@
-# R data file
-*.Rda
-
-# R history
-*.Rhistory
-
-# R project
-*.Rproj*
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rda
