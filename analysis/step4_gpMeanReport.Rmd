@@ -1,15 +1,28 @@
 ---
-title: "Summary of basic findings"
-output: html_notebook
+title: "Plotting decodeCC exp1"
+author: "Yu-Chin Chiu"
+date: "June 15, 2017"
+output: html_document
 ---
-#### First, Set up the environment and load the data
 
-```{r}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### First, Set up the environment and load the data
+```
 rm(list=ls())
 library(tidyverse)  # to use ggplot 
 currentDir <-  getwd()
 setwd(currentDir)
-load("step3_gpSummary.Rda")
+load("~/YCCProjects/decodeCC/analysis/step3_gpSummary.Rda")
+```
+```{r, include=FALSE}
+rm(list=ls())
+library(tidyverse)  # to use ggplot 
+currentDir <-  getwd()
+setwd(currentDir)
+load("~/YCCProjects/decodeCC/analysis/step3_gpSummary.Rda")
 ```
 
 #### Set up some formating for the plots
@@ -22,7 +35,6 @@ apatheme = theme_bw()+
         panel.grid.minor = element_blank(),
         panel.border = element_blank(),
         axis.line=element_line())
-
 dodge = position_dodge(width=0.9)
 ```
 
@@ -40,11 +52,12 @@ CSPC %>%
   ylab("mean RT (Stroop)") +
   coord_cartesian(ylim=c(550,700)) +
   scale_fill_grey()
-# alternatively, can use geom_bar(stat='identity', position = dodge) in lieu of goem_col(poistion = dodge)
-# the default of geom_bar is count, but the default for geom_col is 'identity' (data)
- 
+
 
 ```
+
+  Alternatively, can use geom_bar(stat='identity', position = dodge) in lieu of goem_col(poistion = dodge). The default of geom_bar is count, but the default for geom_col is 'identity' (data)
+
 ## 1b. Plot the 2 half x 2 block type x 2 trial type CSPC effect: RT
 ```{r}
 
@@ -184,4 +197,3 @@ gpBasic %>%
 pearR <- cor(gpBasic$CSPC, gpBasic$ISSP)
 pearR 
 ```
-
