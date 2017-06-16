@@ -78,7 +78,7 @@ CSPC %>%
   geom_errorbar(aes(ymax = gpmeanACC + (1*SE_acc), ymin = gpmeanACC - (1*SE_acc)), 
                 position = dodge, width = .25) + 
   ylab("mean ACC (Stroop)") +
-  coord_cartesian(ylim=c(65,100)) +
+  coord_cartesian(ylim=c(80,100)) +
   scale_fill_grey()
 ```
 
@@ -130,7 +130,6 @@ ISSP %>%
 
 ## Memory Recognition Task
 ### 5a.Plot the memory performance as a function of control context previously (2 block type x 2 trial type) in the Stroop task
-
 ```{r recogM}
 levels(recogM$trialType) <- c("Congruent", "Incongruent","New")
 levels(recogM$blockType) <- c("Rarely InCongruent", "Freq. InCongruent", "New")
@@ -141,12 +140,12 @@ recogM %>%
   geom_errorbar(aes(ymax = gpmeanACC + (1*SE_acc), ymin = gpmeanACC - (1*SE_acc)), 
                 position = dodge, width = .25) + 
   ylab("mean ACC (memory)") +
-  coord_cartesian(ylim=c(45,80)) +
+  coord_cartesian(ylim=c(50,80)) +
   scale_fill_grey()
 
 ```
-### 5b.Plot the memory performance as a function of control context previously (2 half x 2 block type x 2 trial type) in the Stroop task
 
+### 5b.Plot the memory performance as a function of control context previously (2 half x 2 block type x 2 trial type) in the Stroop task
 ```{r recogM2}
 levels(recogM_half$trialType) <- c("Congruent", "Incongruent", "New")
 levels(recogM_half$blockType) <- c("Rarely InCongruent", "Freq. InCongruent", "New")
@@ -159,7 +158,7 @@ recogM_half %>%
                 position = dodge, width = .25) + 
   facet_grid(.~half) + 
   ylab("mean ACC (memory)") +
-  coord_cartesian(ylim=c(45,80)) +
+  coord_cartesian(ylim=c(50,80)) +
   scale_fill_grey()
 
 ```
