@@ -57,7 +57,7 @@ but the default for geom\_col is 'identity' (data)
       geom_errorbar(aes(ymax = gpmeanACC + (1*SE_acc), ymin = gpmeanACC - (1*SE_acc)), 
                     position = dodge, width = .25) + 
       ylab("mean ACC (Stroop)") +
-      coord_cartesian(ylim=c(65,100)) +
+      coord_cartesian(ylim=c(80,100)) +
       scale_fill_grey()
 
 ![](figure/CSPC_ACC-1.png)
@@ -123,12 +123,12 @@ Memory Recognition Task
       geom_errorbar(aes(ymax = gpmeanACC + (1*SE_acc), ymin = gpmeanACC - (1*SE_acc)), 
                     position = dodge, width = .25) + 
       ylab("mean ACC (memory)") +
-      coord_cartesian(ylim=c(45,80)) +
+      coord_cartesian(ylim=c(50,80)) +
       scale_fill_grey()
 
-![](figure/recogM-1.png) \#\#\# 5b.Plot the memory performance as a
-function of control context previously (2 half x 2 block type x 2 trial
-type) in the Stroop task
+![](figure/recogM-1.png)
+
+### 5b.Plot the memory performance as a function of control context previously (2 half x 2 block type x 2 trial type) in the Stroop task
 
     levels(recogM_half$trialType) <- c("Congruent", "Incongruent", "New")
     levels(recogM_half$blockType) <- c("Rarely InCongruent", "Freq. InCongruent", "New")
@@ -141,7 +141,7 @@ type) in the Stroop task
                     position = dodge, width = .25) + 
       facet_grid(.~half) + 
       ylab("mean ACC (memory)") +
-      coord_cartesian(ylim=c(45,80)) +
+      coord_cartesian(ylim=c(50,80)) +
       scale_fill_grey()
 
 ![](figure/recogM2-1.png)
