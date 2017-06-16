@@ -2,22 +2,16 @@
 title: "Plotting decodeCC exp1"
 author: "Yu-Chin Chiu"
 date: "June 15, 2017"
-output: html_document
+output: md_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.width=6, fig.height=4, fig.path='figure/',
+                      include = TRUE, warning=FALSE, message=FALSE)
 ```
 
-#### First, Set up the environment and load the data
-```
-rm(list=ls())
-library(tidyverse)  # to use ggplot 
-currentDir <-  getwd()
-setwd(currentDir)
-load("~/YCCProjects/decodeCC/analysis/step3_gpSummary.Rda")
-```
-```{r, include=FALSE}
+#### First, Set up the environment and load the data: step3_gpSummary.Rda
+```{r set up, include=FALSE}
 rm(list=ls())
 library(tidyverse)  # to use ggplot 
 currentDir <-  getwd()
@@ -26,10 +20,10 @@ load("~/YCCProjects/decodeCC/analysis/step3_gpSummary.Rda")
 ```
 
 #### Set up some formating for the plots
-Set up some good format, apatheme is good for publication, with white background, with black axis lines, no grids
-Default theme is good for visual comparison (theme_gray() with white grid lines, gray background)
+Set up some good format, here i am using apatheme with white background for figure 1a, with black axis lines, no grids.
+Default theme is good for visual comparison (theme_gray() with white grid lines, gray background), used for others here.
 
-```{r}
+```{r fig apa-format, echo = FALSE}
 apatheme = theme_bw()+
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -37,9 +31,9 @@ apatheme = theme_bw()+
         axis.line=element_line())
 dodge = position_dodge(width=0.9)
 ```
-
-## 1a. Plot the 2 block type x 2 trial type CSPC effect: RT
-```{r}
+## Stroop Task
+### 1a. Plot the 2 block type x 2 trial type CSPC effect: RT
+```{r CSPC_RT}
 levels(CSPC$trialType) <- c("Congruent", "Incongruent")
 levels(CSPC$blockType) <- c("Rarely InCongruent", "Freq. InCongruent")
 
@@ -48,20 +42,19 @@ CSPC %>%
   geom_col(position = dodge) + 
   geom_errorbar(aes(ymax = gpmeanRT + (1*SE_rt), ymin = gpmeanRT - (1*SE_rt)), 
                 position = dodge, width = .25) + 
-  #apatheme + 
+  apatheme + 
   ylab("mean RT (Stroop)") +
   coord_cartesian(ylim=c(550,700)) +
   scale_fill_grey()
 
-
 ```
 
-  Alternatively, can use geom_bar(stat='identity', position = dodge) in lieu of goem_col(poistion = dodge). The default of geom_bar is count, but the default for geom_col is 'identity' (data)
+Alternatively, can use geom_bar(stat='identity', position = dodge) in lieu of goem_col(poistion = dodge). 
+The default of geom_bar is count, but the default for geom_col is 'identity' (data)
 
-## 1b. Plot the 2 half x 2 block type x 2 trial type CSPC effect: RT
-```{r}
-
-levels(CSPC_half$half) <- c("First Half", "Second Half")
+### 1b. Plot the 2 half x 2 block type x 2 trial type CSPC effect: RT
+```{r CSPC_RT2}
+levels(CSPC_half$half)      <- c("First Half", "Second Half")
 levels(CSPC_half$blockType) <- c("Rarely InCongruent", "Freq. InCongruent")
 levels(CSPC_half$trialType) <- c("Congruent", "Incongruent")
 
@@ -77,8 +70,8 @@ CSPC_half %>%
 
 ```
 
-## 2.Plot the 2 block type x 2 trial type CSPC effect: ACC
-```{r}
+### 2.Plot the 2 block type x 2 trial type CSPC effect: ACC
+```{r CSPC_ACC}
 CSPC %>%
   ggplot(aes(x = blockType, y = gpmeanACC, fill = trialType))  +
   geom_col(position = dodge) + 
@@ -89,10 +82,10 @@ CSPC %>%
   scale_fill_grey()
 ```
 
-## 3a.Plot the 2 block type x 2 trial type ISSP effect: RT
-```{r}
+### 3a.Plot the 2 block type x 2 trial type ISSP effect: RT
+```{r ISSP_RT}
 levels(ISSP$trialType) <- c("Repeat", "Switch")
-levels(ISSP$swProb) <- c("Rarely switching", "Freq. switching")
+levels(ISSP$swProb)    <- c("Rarely switching", "Freq. switching")
 
 ISSP %>%
   ggplot(aes(x = swProb, y = gpmeanRT, fill = trialType))  +
@@ -106,8 +99,8 @@ ISSP %>%
 
 ```
 
-## 3b.Plot the 2 half x 2 block type x 2 trial type ISSP effect: RT
-```{r}
+### 3b.Plot the 2 half x 2 block type x 2 trial type ISSP effect: RT
+```{r ISSP_RT2}
 levels(ISSP_half$trialType) <- c("Repeat", "Switch")
 levels(ISSP_half$swProb) <- c("Rarely switching", "Freq. switching")
 levels(ISSP_half$half) <- c("First half", "Second half")
@@ -123,8 +116,8 @@ ISSP_half %>%
   scale_fill_grey()
 ```
 
-## 4.Plot the 2 block type x 2 trial type ISSP effect: ACC
-```{r}
+### 4.Plot the 2 block type x 2 trial type ISSP effect: ACC
+```{r ISSP_ACC}
 ISSP %>%
   ggplot(aes(x = swProb, y = gpmeanACC, fill = trialType))  +
   geom_col(position = dodge) + 
@@ -135,10 +128,10 @@ ISSP %>%
   scale_fill_grey()
 ```
 
+## Memory Recognition Task
+### 5a.Plot the memory performance as a function of control context previously (2 block type x 2 trial type) in the Stroop task
 
-## 5a.Plot the memory performance as a function of control context previously (2 block type x 2 trial type) in the Stroop task
-
-```{r}
+```{r recogM}
 levels(recogM$trialType) <- c("Congruent", "Incongruent","New")
 levels(recogM$blockType) <- c("Rarely InCongruent", "Freq. InCongruent", "New")
 
@@ -152,12 +145,12 @@ recogM %>%
   scale_fill_grey()
 
 ```
-## 5b.Plot the memory performance as a function of control context previously (2 half x 2 block type x 2 trial type) in the Stroop task
+### 5b.Plot the memory performance as a function of control context previously (2 half x 2 block type x 2 trial type) in the Stroop task
 
-```{r}
+```{r recogM2}
 levels(recogM_half$trialType) <- c("Congruent", "Incongruent", "New")
 levels(recogM_half$blockType) <- c("Rarely InCongruent", "Freq. InCongruent", "New")
-levels(recogM_half$half) <- c("New", "First Half", "Second Half")
+levels(recogM_half$half)      <- c("New", "First Half", "Second Half")
 
 recogM_half %>%
   ggplot(aes(x = blockType, y = gpmeanACC, fill = trialType))  +
@@ -171,8 +164,8 @@ recogM_half %>%
 
 ```
 
-## 6.Plot the RT for memory task as a function of control context previously (2 block type x 2 trial type) in the Stroop task
-```{r}
+### 6.Plot the RT for memory task as a function of control context previously (2 block type x 2 trial type) in the Stroop task
+```{r memRT}
 recogM %>%
   ggplot(aes(x = blockType, y = gpmeanRT, fill = trialType))  +
   geom_col(position = dodge) + 
@@ -181,9 +174,11 @@ recogM %>%
   ylab("mean RT (memory)") +
   coord_cartesian(ylim=c(800,1000)) +
   scale_fill_grey()
+
 ```
-## 7.Scatter plot (CSPC vs. ISSP) to see if there is any relationship bw two effects: 
-```{r}
+
+### 7.Scatter plot (CSPC vs. ISSP) to see if there is any relationship bw two effects: 
+```{r CSPCvsISSP}
 gpBasic %>%
   ggplot(mapping = aes(x = ISSP, y = CSPC)) + 
   geom_point() + 
@@ -191,9 +186,9 @@ gpBasic %>%
 
 ```
 
-### No correlation so far
+No correlation so far, p = 
 
-```{r}
-pearR <- cor(gpBasic$CSPC, gpBasic$ISSP)
-pearR 
+```{r pearsonR}
+cor(gpBasic$CSPC, gpBasic$ISSP)
+ 
 ```
