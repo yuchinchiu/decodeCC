@@ -4,3 +4,4 @@ analysis/*.RData
 analysis/*.Ruserdata
 analysis/*.Rda
 
+.Rproj.user
